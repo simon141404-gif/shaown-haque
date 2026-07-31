@@ -21,20 +21,20 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 md:py-32 px-6" style={{ background: '#0a0a0a' }}>
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-white font-bold mb-12" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
-          Services
-        </h2>
+    <section id="services" className="py-20 px-6">
+      <div className="max-w-4xl mx-auto">
+        {/* Section Title */}
+        <h2 className="text-3xl font-bold text-black mb-8">Services</h2>
 
+        {/* Services Grid */}
         <div className="grid md:grid-cols-2 gap-6">
           {services.map((service, index) => (
             <div 
               key={index}
-              className="p-8 border border-white/10 hover:border-white/20 transition-colors"
+              className="p-6 border border-gray-200 hover:border-gray-300 transition-colors"
             >
-              <h3 className="text-white font-medium text-xl mb-3">{service.title}</h3>
-              <p className="text-white/40 leading-relaxed">{service.description}</p>
+              <h3 className="text-xl font-semibold text-black mb-3">{service.title}</h3>
+              <p className="text-gray-600 leading-relaxed">{service.description}</p>
             </div>
           ))}
         </div>

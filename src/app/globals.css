@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #0a0a0a;
+  --background: #ffffff;
 }
 
 * {
@@ -18,9 +18,10 @@ html {
 
 body {
   background: var(--background);
-  color: white;
+  color: black;
   overflow-x: hidden;
   font-family: var(--font-inter), system-ui, sans-serif;
+  line-height: 1.6;
 }
 
 /* Custom Cursor */

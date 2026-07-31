@@ -4,73 +4,74 @@ const projects = [
   {
     title: 'E-Commerce Platform',
     description: 'A modern e-commerce solution with real-time inventory and seamless checkout experience.',
-    tags: ['Next.js', 'Stripe', 'Tailwind'],
+    category: 'Web Development',
+    date: 'January 2026',
   },
   {
     title: 'AI Dashboard',
     description: 'Analytics dashboard with real-time data visualization and AI-powered insights.',
-    tags: ['React', 'D3.js', 'Python'],
+    category: 'Web Development',
+    date: 'December 2025',
   },
   {
     title: 'Social App',
     description: 'Social media application with real-time messaging and engagement features.',
-    tags: ['React Native', 'Firebase'],
+    category: 'Mobile App',
+    date: 'November 2025',
   },
   {
     title: 'Portfolio v1',
     description: 'Personal portfolio with 3D animations and interactive elements.',
-    tags: ['Three.js', 'GSAP', 'WebGL'],
+    category: 'Web Development',
+    date: 'October 2025',
   },
   {
     title: 'Task Management',
     description: 'Productivity app with kanban boards and team collaboration features.',
-    tags: ['Vue.js', 'Node.js', 'MongoDB'],
+    category: 'Web App',
+    date: 'September 2025',
   },
   {
     title: 'Blog Platform',
     description: 'Content management system with SEO optimization and analytics.',
-    tags: ['Next.js', 'Prisma', 'PostgreSQL'],
+    category: 'Web Development',
+    date: 'August 2025',
   },
 ]
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="py-24 md:py-32 px-6" style={{ background: '#0a0a0a' }}>
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-white font-bold mb-12" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
-          Portfolio
-        </h2>
+    <section id="portfolio" className="py-20 px-6 bg-gray-50">
+      <div className="max-w-4xl mx-auto">
+        {/* Section Title */}
+        <h2 className="text-3xl font-bold text-black mb-8">Portfolio</h2>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* Projects List */}
+        <div className="space-y-6">
           {projects.map((project, index) => (
-            <div 
+            <article 
               key={index}
-              className="group border border-white/10 hover:border-white/20 transition-colors"
+              className="p-6 bg-white border border-gray-200 hover:shadow-lg transition-shadow cursor-pointer"
             >
-              {/* Image Placeholder */}
-              <div className="aspect-video bg-white/5 flex items-center justify-center">
-                <span className="text-white/20 text-4xl font-bold">{index + 1}</span>
-              </div>
-
-              <div className="p-6">
-                <h3 className="text-white font-medium text-lg mb-2 group-hover:text-white/80 transition-colors">
+              <div className="flex items-start justify-between mb-3">
+                <h3 className="text-xl font-semibold text-black">
                   {project.title}
                 </h3>
-                <p className="text-white/40 text-sm mb-4">{project.description}</p>
-                
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span 
-                      key={tag}
-                      className="px-3 py-1 bg-white/5 text-white/40 text-xs"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                <span className="text-sm text-gray-400">{project.date}</span>
               </div>
-            </div>
+              <p className="text-gray-600 mb-4">{project.description}</p>
+              <span className="inline-block px-3 py-1 text-xs font-medium text-gray-500 bg-gray-100">
+                {project.category}
+              </span>
+            </article>
           ))}
+        </div>
+
+        {/* Load More */}
+        <div className="text-center mt-10">
+          <button className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-full hover:border-black transition-colors">
+            Load More
+          </button>
         </div>
       </div>
     </section>

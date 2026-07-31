@@ -1,5 +1,11 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
 const services = [
   {
     title: 'Web Development',
@@ -20,21 +26,45 @@ const services = [
 ]
 
 export default function Services() {
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo('.service-card', 
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+          }
+        }
+      )
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section id="services" className="py-20 px-6">
+    <section ref={sectionRef} id="services" className="py-24 md:py-32 px-6">
       <div className="max-w-4xl mx-auto">
         {/* Section Title */}
-        <h2 className="text-3xl font-bold text-black mb-8">Services</h2>
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-12 tracking-tight">
+          Services
+        </h2>
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 gap-6">
           {services.map((service, index) => (
             <div 
               key={index}
-              className="p-6 border border-gray-200 hover:border-gray-300 transition-colors"
+              className="service-card p-8 border border-gray-100 hover:border-gray-200 hover:shadow-lg hover:shadow-gray-100/50 transition-all duration-300"
             >
-              <h3 className="text-xl font-semibold text-black mb-3">{service.title}</h3>
-              <p className="text-gray-600 leading-relaxed">{service.description}</p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
+              <p className="text-gray-500 leading-relaxed">{service.description}</p>
             </div>
           ))}
         </div>

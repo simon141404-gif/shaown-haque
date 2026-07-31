@@ -1,5 +1,11 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
 const posts = [
   {
     title: 'Getting Started with Next.js 14',
@@ -25,20 +31,43 @@ const posts = [
 ]
 
 export default function Blog() {
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo('.blog-card', 
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+          }
+        }
+      )
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section id="blog" className="py-20 px-6">
+    <section ref={sectionRef} id="blog" className="py-24 md:py-32 px-6">
       <div className="max-w-4xl mx-auto">
         {/* Section Title */}
-        <h2 className="text-3xl font-bold text-black mb-8">Latest Posts</h2>
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-12 tracking-tight">
+          Latest Posts
+        </h2>
 
         {/* Blog Cards */}
         <div className="grid md:grid-cols-3 gap-6">
           {posts.map((post, index) => (
             <article 
               key={index}
-              className="border border-gray-200 hover:border-gray-300 transition-colors cursor-pointer"
+              className="blog-card border border-gray-100 hover:border-gray-200 hover:shadow-lg hover:shadow-gray-100/50 transition-all duration-300 cursor-pointer"
             >
-              {/* Content */}
               <div className="p-5">
                 {/* Category & Date */}
                 <div className="flex items-center gap-3 mb-3">
@@ -48,17 +77,17 @@ export default function Blog() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-lg font-semibold text-black mb-2 leading-snug">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2 leading-snug">
                   {post.title}
                 </h3>
 
                 {/* Excerpt */}
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-gray-500 text-sm leading-relaxed mb-4">
                   {post.excerpt}
                 </p>
 
                 {/* Date */}
-                <p className="text-gray-400 text-xs mt-4">{post.date}</p>
+                <p className="text-gray-400 text-xs">{post.date}</p>
               </div>
             </article>
           ))}

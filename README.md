@@ -2,7 +2,7 @@
 
 Awwwards-winning portfolio website built with Next.js, TypeScript, Tailwind CSS, GSAP, and Framer Motion.
 
-![Portfolio Preview](https://i.postimg.cc/m2Ghq87r/Screenshot-2026-07-31-161703.png)
+
 
 ## 🌐 Live Demo
 

@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Image from 'next/image'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -210,21 +209,22 @@ export default function Hero() {
           <div className="absolute inset-0 rounded-full border-2 border-accent-purple/50 animate-spin-slow" style={{ animationDuration: '10s' }} />
           <div className="absolute inset-4 rounded-full border border-accent-blue/30 animate-spin-slow" style={{ animationDuration: '15s', animationDirection: 'reverse' }} />
 
-          {/* Profile Image Container */}
-          <div className="relative w-[350px] h-[350px] lg:w-[450px] lg:h-[450xl] rounded-full overflow-hidden glass-card">
-            {/* Floating Animation */}
-            <div className="absolute inset-0 animate-float">
-              <Image
-                src="https://i.postimg.cc/m2Ghq87r/Screenshot-2026-07-31-161703.png"
-                alt="Shawon Haque"
-                fill
-                className="object-cover"
-                priority
-              />
+          {/* Profile Image Container - Stylish Avatar */}
+          <div className="relative w-[350px] h-[350px] lg:w-[450px] lg:h-[450px] rounded-full overflow-hidden glass-card">
+            {/* Gradient Background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-accent-purple via-accent-pink to-accent-blue" />
+            
+            {/* Animated Circles */}
+            <div className="absolute inset-4 border-2 border-white/20 rounded-full animate-pulse" />
+            <div className="absolute inset-8 border border-white/10 rounded-full" />
+            
+            {/* Initials */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="font-display text-[150px] lg:text-[200px] text-white/80 tracking-wider">S</span>
             </div>
 
             {/* Glass Reflection */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent pointer-events-none" />
           </div>
 
           {/* Floating Elements */}

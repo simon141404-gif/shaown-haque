@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Image from 'next/image'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -86,19 +85,23 @@ export default function About() {
 
         {/* Content Grid */}
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left - Image */}
+          {/* Left - Stylized Avatar */}
           <div className="relative">
             {/* Glow */}
             <div className="absolute inset-0 bg-gradient-to-r from-accent-purple to-accent-blue rounded-2xl blur-[40px] opacity-20" />
             
-            {/* Image Container */}
-            <div className="relative glass-card rounded-2xl overflow-hidden aspect-[4/5]">
-              <Image
-                src="https://i.postimg.cc/m2Ghq87r/Screenshot-2026-07-31-161703.png"
-                alt="Shawon Haque"
-                fill
-                className="object-cover"
-              />
+            {/* Avatar Container */}
+            <div className="relative glass-card rounded-2xl overflow-hidden aspect-[4/5] flex items-center justify-center">
+              {/* Gradient Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-accent-purple/20" />
+              
+              {/* Animated Circles */}
+              <div className="absolute inset-10 border-2 border-accent-purple/30 rounded-full animate-pulse" />
+              <div className="absolute inset-20 border border-accent-blue/20 rounded-full" />
+              <div className="absolute inset-32 border border-accent-pink/10 rounded-full" />
+              
+              {/* Large Initial */}
+              <span className="font-display text-[180px] text-white/10">S</span>
               
               {/* Overlay Gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />

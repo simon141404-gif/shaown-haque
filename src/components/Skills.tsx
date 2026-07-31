@@ -100,12 +100,12 @@ export default function Skills() {
         {/* Main Skills Grid */}
         <div 
           ref={cardsRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-16"
         >
           {skills.map((skill, index) => (
             <motion.div
               key={skill.name}
-              className="group glass-card rounded-2xl p-6 card-hover cursor-pointer relative overflow-hidden"
+              className="group glass-card rounded-2xl p-4 md:p-6 card-hover cursor-pointer relative overflow-hidden"
               whileHover={{ scale: 1.02 }}
               transition={{ type: 'spring', stiffness: 300 }}
             >
@@ -119,9 +119,9 @@ export default function Skills() {
 
               <div className="relative z-10">
                 {/* Icon & Name */}
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-3xl">{skill.icon}</span>
-                  <span className="font-medium">{skill.name}</span>
+                <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
+                  <span className="text-2xl md:text-3xl">{skill.icon}</span>
+                  <span className="font-medium text-sm md:text-base">{skill.name}</span>
                 </div>
 
                 {/* Progress Bar */}
@@ -137,14 +137,14 @@ export default function Skills() {
                 </div>
 
                 {/* Percentage */}
-                <p className="text-right text-sm text-white/40 mt-2">
+                <p className="text-right text-xs md:text-sm text-white/40 mt-1 md:mt-2">
                   {skill.level}%
                 </p>
               </div>
 
               {/* Corner Accent */}
               <div 
-                className="absolute top-0 right-0 w-16 h-16 opacity-20 group-hover:opacity-40 transition-opacity"
+                className="absolute top-0 right-0 w-12 md:w-16 h-12 md:h-16 opacity-20 group-hover:opacity-40 transition-opacity"
                 style={{
                   background: `linear-gradient(135deg, transparent 50%, ${skill.color}50%)`,
                 }}

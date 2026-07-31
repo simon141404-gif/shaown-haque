@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { motion } from 'framer-motion'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -20,6 +21,35 @@ export default function Hero() {
     const bg = backgroundRef.current
 
     if (!hero || !profile || !text || !bg) return
+
+    // Split text animation on load
+    const splitText = text.querySelectorAll('.split-text')
+    gsap.fromTo(splitText, 
+      { y: 100, opacity: 0, rotateX: -90 },
+      { 
+        y: 0, 
+        opacity: 1, 
+        rotateX: 0,
+        duration: 1, 
+        stagger: 0.1,
+        ease: 'power4.out',
+        delay: 0.5
+      }
+    )
+
+    // Animate stats
+    const stats = text.querySelectorAll('.stat-item')
+    gsap.fromTo(stats,
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, delay: 1.2, ease: 'power3.out' }
+    )
+
+    // Animate buttons
+    const buttons = text.querySelectorAll('.hero-btn')
+    gsap.fromTo(buttons,
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, delay: 1.4, ease: 'power3.out' }
+    )
 
     // Mouse parallax effect
     const handleMouseMove = (e: MouseEvent) => {
@@ -144,19 +174,19 @@ export default function Hero() {
 
           {/* Main Text */}
           <div className="relative z-10">
-            <p className="text-accent-purple font-medium tracking-[0.3em] mb-4 text-sm lg:text-base">
+            <p className="split-text text-accent-purple font-medium tracking-[0.3em] mb-4 text-sm lg:text-base">
               FULL STACK DEVELOPER
             </p>
             
             <h2 className="font-display text-6xl lg:text-8xl xl:text-9xl tracking-wider mb-6">
-              <span className="block">HEY,</span>
-              <span className="block">I&apos;M SHAWON</span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-accent-purple via-accent-pink to-accent-blue">
+              <span className="split-text block">HEY,</span>
+              <span className="split-text block">I'M SHAWON</span>
+              <span className="split-text block text-transparent bg-clip-text bg-gradient-to-r from-accent-purple via-accent-pink to-accent-blue">
                 HAQUE
               </span>
             </h2>
 
-            <p className="text-white/60 text-lg max-w-xl mb-8 leading-relaxed">
+            <p className="split-text text-white/60 text-lg max-w-xl mb-8 leading-relaxed">
               Crafting exceptional digital experiences with precision, passion, and cutting-edge technology.
             </p>
 
@@ -164,13 +194,13 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <a
                 href="#projects"
-                className="btn-primary magnetic"
+                className="hero-btn btn-primary magnetic"
               >
                 View Projects
               </a>
               <a
                 href="#contact"
-                className="btn-secondary magnetic"
+                className="hero-btn btn-secondary magnetic"
               >
                 Download CV
               </a>
@@ -178,15 +208,15 @@ export default function Hero() {
 
             {/* Stats */}
             <div className="flex gap-12 justify-center lg:justify-start mt-12">
-              <div className="text-center">
+              <div className="stat-item text-center">
                 <p className="font-display text-4xl lg:text-5xl text-accent-purple">5+</p>
                 <p className="text-white/40 text-sm">Years Exp.</p>
               </div>
-              <div className="text-center">
+              <div className="stat-item text-center">
                 <p className="font-display text-4xl lg:text-5xl text-accent-blue">50+</p>
                 <p className="text-white/40 text-sm">Projects</p>
               </div>
-              <div className="text-center">
+              <div className="stat-item text-center">
                 <p className="font-display text-4xl lg:text-5xl text-accent-pink">30+</p>
                 <p className="text-white/40 text-sm">Clients</p>
               </div>

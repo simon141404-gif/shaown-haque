@@ -128,7 +128,7 @@ export default function Projects() {
         {/* Projects Grid */}
         <div 
           ref={projectsRef}
-          className="grid md:grid-cols-2 gap-8"
+          className="grid md:grid-cols-2 gap-6 md:gap-8"
         >
           {filteredProjects.map((project) => (
             <motion.div
@@ -138,7 +138,11 @@ export default function Projects() {
               onMouseLeave={() => setHoveredProject(null)}
               whileHover={{ scale: 1.02 }}
               transition={{ type: 'spring', stiffness: 300 }}
+              layout
             >
+              {/* Glow Effect on Hover */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-accent-purple via-accent-pink to-accent-blue rounded-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-sm" />
+
               {/* Image Container */}
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image
@@ -146,6 +150,7 @@ export default function Projects() {
                   alt={project.title}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 
                 {/* Overlay */}
@@ -163,7 +168,7 @@ export default function Projects() {
               </div>
 
               {/* Content */}
-              <div className="p-6">
+              <div className="relative p-6">
                 <h3 className="text-xl font-semibold mb-2 group-hover:text-accent-purple transition-colors">
                   {project.title}
                 </h3>

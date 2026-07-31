@@ -67,13 +67,16 @@ export default function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-500 ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
       }`}
+      role="navigation"
+      aria-label="Main navigation"
     >
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        <div className="glass rounded-full px-8 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="glass rounded-full px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between">
           {/* Logo */}
           <a 
             href="#"
-            className="font-display text-2xl tracking-wider text-white hover:text-accent-purple transition-colors"
+            className="font-display text-xl sm:text-2xl tracking-wider text-white hover:text-accent-purple transition-colors"
+            aria-label="Shawon Haque - Home"
           >
             SHAWON.
           </a>
@@ -84,11 +87,12 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className={`relative px-4 py-2 text-sm font-medium transition-colors ${
+                className={`relative px-3 py-2 text-sm font-medium transition-colors ${
                   activeSection === link.href.slice(1)
                     ? 'text-white'
                     : 'text-white/60 hover:text-white'
                 }`}
+                aria-current={activeSection === link.href.slice(1) ? 'page' : undefined}
               >
                 {link.name}
                 {/* Active Indicator */}
@@ -108,13 +112,17 @@ export default function Navbar() {
           {/* CTA Button */}
           <a
             href="#contact"
-            className="hidden md:block px-6 py-2 bg-gradient-to-r from-accent-purple to-accent-blue rounded-full text-sm font-medium hover:shadow-lg hover:shadow-accent-purple/30 transition-all"
+            className="hidden md:block px-4 sm:px-6 py-2 bg-gradient-to-r from-accent-purple to-accent-blue rounded-full text-sm font-medium hover:shadow-lg hover:shadow-accent-purple/30 transition-all"
           >
             Let's Talk
           </a>
 
           {/* Mobile Menu Button */}
-          <button className="md:hidden p-2">
+          <button 
+            className="md:hidden p-2"
+            aria-label="Open mobile menu"
+            aria-expanded="false"
+          >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>

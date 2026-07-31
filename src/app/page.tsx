@@ -57,7 +57,7 @@ export default function Home() {
   }
 
   return (
-    <main className="relative min-h-screen">
+    <main id="main-content" className="relative min-h-screen">
       {/* Loading Screen */}
       {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
 
@@ -68,17 +68,25 @@ export default function Home() {
       <div 
         className="scroll-progress"
         style={{ transform: `scaleX(${scrollProgress})` }}
+        role="progressbar"
+        aria-valuenow={Math.round(scrollProgress * 100)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="Page scroll progress"
       />
 
       {/* Noise & Film Grain Overlay */}
-      <div className="noise-overlay" />
-      <div className="film-grain" />
+      <div className="noise-overlay" aria-hidden="true" />
+      <div className="film-grain" aria-hidden="true" />
 
       {/* Navbar */}
       <Navbar />
 
       {/* Main Content */}
-      <div className={isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'}>
+      <div 
+        className={isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'}
+        aria-hidden={isLoading}
+      >
         <Hero />
         <About />
         <Skills />

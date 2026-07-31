@@ -380,12 +380,59 @@ body {
   background: linear-gradient(180deg, var(--accent-pink), var(--accent-purple));
 }
 
+/* Split Text Animation */
+.split-text {
+  display: inline-block;
+  will-change: transform, opacity;
+  perspective: 1000px;
+}
+
+/* Stat Item Animation */
+.stat-item {
+  will-change: transform, opacity;
+}
+
+/* Hero Button Animation */
+.hero-btn {
+  will-change: transform, opacity;
+}
+
+/* Focus States for Accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent-purple);
+  outline-offset: 2px;
+}
+
+/* Skip to Content Link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--accent-purple);
+  color: white;
+  padding: 8px 16px;
+  z-index: 10000;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  
+  .split-text {
+    transform: none !important;
+    opacity: 1 !important;
   }
 }
 

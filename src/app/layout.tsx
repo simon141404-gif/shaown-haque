@@ -18,6 +18,17 @@ const bebusNeue = Bebas_Neue({
 export const metadata: Metadata = {
   title: 'Shawon Haque | Full Stack Developer',
   description: 'Full Stack Developer crafting exceptional digital experiences with precision, passion, and cutting-edge technology.',
+  keywords: ['Full Stack Developer', 'React', 'Next.js', 'Web Developer', 'Portfolio'],
+  authors: [{ name: 'Shawon Haque' }],
+  openGraph: {
+    title: 'Shawon Haque | Full Stack Developer',
+    description: 'Full Stack Developer crafting exceptional digital experiences with precision, passion, and cutting-edge technology.',
+    type: 'website',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function RootLayout({
@@ -28,6 +39,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${bebusNeue.variable}`}>
       <body className={inter.className}>
+        {/* Skip to main content for accessibility */}
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         {children}
       </body>
     </html>

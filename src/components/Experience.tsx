@@ -45,12 +45,12 @@ export default function Experience() {
 
     // Animate timeline items
     gsap.fromTo(timeline.children, 
-      { opacity: 0, x: -50 },
+      { opacity: 0, x: -30 },
       {
         opacity: 1,
         x: 0,
-        duration: 0.8,
-        stagger: 0.3,
+        duration: 0.6,
+        stagger: 0.2,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
@@ -69,74 +69,64 @@ export default function Experience() {
     <section 
       id="experience"
       ref={sectionRef}
-      className="section relative overflow-hidden"
+      className="relative py-24 md:py-32 overflow-hidden"
+      style={{ background: '#09090B' }}
     >
       {/* Background */}
-      <div className="absolute inset-0 background-secondary" />
-      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[150px]" />
+      <div className="absolute inset-0 z-0" style={{
+        background: 'radial-gradient(ellipse 50% 50% at 50% 0%, rgba(139, 92, 246, 0.1), transparent)'
+      }} />
 
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <p className="text-accent-cyan font-medium tracking-[0.3em] mb-4 text-sm">
-            CAREER PATH
-          </p>
-          <h2 className="section-title">
+        <div className="text-center mb-16">
+          <p className="text-purple-400 font-medium tracking-[0.2em] mb-4 text-sm uppercase">
             Experience
-          </h2>
-          <p className="text-white/60 mt-4 max-w-2xl mx-auto">
-            My professional journey through different roles and companies.
           </p>
+          <h2 className="text-white font-bold leading-tight" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
+            Work History
+          </h2>
         </div>
 
         {/* Timeline */}
-        <div 
-          ref={timelineRef}
-          className="relative"
-        >
-          {/* Vertical Line */}
-          <div className="absolute left-[50%] top-0 bottom-0 w-px bg-gradient-to-b from-accent-purple via-accent-blue to-accent-pink hidden lg:block">
-            {/* Glowing dots on the line */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-accent-purple rounded-full shadow-[0_0_20px_rgba(139,92,246,0.8)]" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-3 h-3 bg-accent-blue rounded-full shadow-[0_0_20px_rgba(59,130,246,0.8)]" />
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-accent-pink rounded-full shadow-[0_0_20px_rgba(236,72,153,0.8)]" />
-          </div>
+        <div ref={timelineRef} className="relative">
+          {/* Timeline Line */}
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-purple-500/50 via-blue-500/50 to-transparent" />
 
-          {/* Experience Cards */}
           {experiences.map((exp, index) => (
             <div 
               key={exp.id}
-              className={`relative flex items-center gap-8 mb-12 last:mb-0 ${
-                index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
+              className={`relative flex items-center mb-12 last:mb-0 ${
+                index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
               }`}
             >
-              {/* Content */}
-              <div className={`flex-1 ${index % 2 === 0 ? 'lg:text-right' : 'lg:text-left'}`}>
-                <div className="glass-card rounded-2xl p-8 card-hover">
-                  {/* Period */}
-                  <p className="text-accent-purple text-sm font-medium mb-2">
-                    {exp.period}
-                  </p>
-                  
-                  {/* Title & Company */}
-                  <h3 className="text-xl font-semibold mb-1">
-                    {exp.title}
-                  </h3>
-                  <p className="text-white/60 mb-4">
-                    {exp.company}
-                  </p>
-                  
-                  {/* Description */}
-                  <p className="text-white/40 text-sm mb-4">
+              {/* Timeline Dot */}
+              <div className="absolute left-4 md:left-1/2 w-3 h-3 rounded-full bg-purple-500 -translate-x-1/2 z-10" 
+                style={{ boxShadow: '0 0 20px rgba(139, 92, 246, 0.5)' }} 
+              />
+
+              {/* Content Card */}
+              <div className={`ml-12 md:ml-0 md:w-[45%] ${
+                index % 2 === 0 ? 'md:mr-auto md:pr-12' : 'md:ml-auto md:pl-12'
+              }`}>
+                <div 
+                  className="p-6 rounded-2xl"
+                  style={{
+                    background: 'rgba(255,255,255,0.02)',
+                    border: '1px solid rgba(255,255,255,0.05)',
+                  }}
+                >
+                  <span className="text-purple-400 text-sm font-medium">{exp.period}</span>
+                  <h3 className="text-white font-semibold text-lg mt-1">{exp.title}</h3>
+                  <p className="text-white/60 text-sm mt-1">{exp.company}</p>
+                  <p className="text-white/50 text-sm mt-3 leading-relaxed">
                     {exp.description}
                   </p>
-                  
-                  {/* Technologies */}
-                  <div className={`flex flex-wrap gap-2 ${index % 2 === 0 ? 'lg:justify-end' : 'lg:justify-start'}`}>
+                  <div className="flex flex-wrap gap-2 mt-4">
                     {exp.technologies.map((tech) => (
                       <span 
                         key={tech}
-                        className="px-3 py-1 bg-white/5 rounded-full text-xs text-white/60"
+                        className="px-2 py-1 bg-white/5 rounded text-xs text-white/40"
                       >
                         {tech}
                       </span>
@@ -144,14 +134,6 @@ export default function Experience() {
                   </div>
                 </div>
               </div>
-
-              {/* Center Dot (Desktop) */}
-              <div className="hidden lg:flex w-16 justify-center">
-                <div className="w-4 h-4 bg-gradient-to-r from-accent-purple to-accent-blue rounded-full shadow-[0_0_15px_rgba(139,92,246,0.6)]" />
-              </div>
-
-              {/* Empty Space for alternating layout */}
-              <div className="flex-1 hidden lg:block" />
             </div>
           ))}
         </div>

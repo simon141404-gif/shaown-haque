@@ -24,12 +24,12 @@ export default function Contact() {
 
     // Animate form elements
     gsap.fromTo(form.children, 
-      { opacity: 0, y: 30 },
+      { opacity: 0, y: 20 },
       {
         opacity: 1,
         y: 0,
         duration: 0.6,
-        stagger: 0.15,
+        stagger: 0.1,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
@@ -54,7 +54,6 @@ export default function Contact() {
     setIsSubmitting(false)
     setFormData({ name: '', email: '', message: '' })
     
-    // Show success message (in real app, you'd handle this differently)
     alert('Message sent successfully!')
   }
 
@@ -69,36 +68,27 @@ export default function Contact() {
     <section 
       id="contact"
       ref={sectionRef}
-      className="section relative overflow-hidden"
+      className="relative py-24 md:py-32 overflow-hidden"
+      style={{ background: '#050505' }}
     >
       {/* Background */}
-      <div className="absolute inset-0 background-tertiary" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-gradient-to-b from-accent-purple/20 to-transparent rounded-full blur-[100px]" />
-      
-      {/* Animated Particles */}
-      {[...Array(15)].map((_, i) => (
-        <div
-          key={i}
-          className="absolute w-1 h-1 bg-accent-purple/50 rounded-full"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animation: `float ${5 + Math.random() * 5}s ease-in-out infinite`,
-            animationDelay: `${Math.random() * 3}s`,
-          }}
-        />
-      ))}
+      <div className="absolute inset-0 z-0" style={{
+        background: `
+          radial-gradient(ellipse 60% 40% at 50% 100%, rgba(139, 92, 246, 0.15), transparent),
+          radial-gradient(ellipse 40% 30% at 20% 50%, rgba(59, 130, 246, 0.08), transparent)
+        `
+      }} />
 
-      <div className="relative z-10 max-w-4xl mx-auto">
+      <div className="relative z-10 max-w-2xl mx-auto px-4 sm:px-6 md:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <p className="text-accent-cyan font-medium tracking-[0.3em] mb-4 text-sm">
-            GET IN TOUCH
+        <div className="text-center mb-12">
+          <p className="text-cyan-400 font-medium tracking-[0.2em] mb-4 text-sm uppercase">
+            Get In Touch
           </p>
-          <h2 className="section-title">
+          <h2 className="text-white font-bold leading-tight mb-4" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
             Let&apos;s Work Together
           </h2>
-          <p className="text-white/60 mt-4 max-w-xl mx-auto">
+          <p className="text-white/50">
             Have a project in mind? Let&apos;s create something amazing together.
           </p>
         </div>
@@ -107,57 +97,69 @@ export default function Contact() {
         <form 
           ref={formRef}
           onSubmit={handleSubmit}
-          className="glass-card rounded-2xl p-8 md:p-12"
+          className="space-y-6"
         >
-          <div className="grid md:grid-cols-2 gap-6 mb-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {/* Name Input */}
-            <div className="relative">
+            <div>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder-white/30 focus:outline-none focus:border-accent-purple/50 transition-colors"
+                className="w-full px-6 py-4 rounded-xl text-white placeholder-white/30 focus:outline-none transition-all"
+                style={{
+                  background: 'rgba(255,255,255,0.03)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                }}
                 placeholder="Name"
               />
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-accent-purple/20 to-accent-blue/20 opacity-0 focus-within:opacity-100 transition-opacity pointer-events-none" />
             </div>
 
             {/* Email Input */}
-            <div className="relative">
+            <div>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder-white/30 focus:outline-none focus:border-accent-purple/50 transition-colors"
+                className="w-full px-6 py-4 rounded-xl text-white placeholder-white/30 focus:outline-none transition-all"
+                style={{
+                  background: 'rgba(255,255,255,0.03)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                }}
                 placeholder="Email"
               />
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-accent-purple/20 to-accent-blue/20 opacity-0 focus-within:opacity-100 transition-opacity pointer-events-none" />
             </div>
           </div>
 
           {/* Message Input */}
-          <div className="relative mb-8">
+          <div>
             <textarea
               name="message"
               value={formData.message}
               onChange={handleChange}
               required
               rows={5}
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder-white/30 focus:outline-none focus:border-accent-purple/50 transition-colors resize-none"
+              className="w-full px-6 py-4 rounded-xl text-white placeholder-white/30 focus:outline-none transition-all resize-none"
+              style={{
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.1)',
+              }}
               placeholder="Tell me about your project..."
             />
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-accent-purple/20 to-accent-blue/20 opacity-0 focus-within:opacity-100 transition-opacity pointer-events-none" />
           </div>
 
           {/* Submit Button */}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full btn-primary flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-4 rounded-xl font-semibold text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            style={{
+              background: 'linear-gradient(135deg, #8B5CF6, #3B82F6)',
+            }}
           >
             {isSubmitting ? (
               <>

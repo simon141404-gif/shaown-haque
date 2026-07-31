@@ -8,22 +8,23 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null)
-  const cardsRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const section = sectionRef.current
-    const cards = cardsRef.current
+    const content = contentRef.current
 
-    if (!section || !cards) return
+    if (!section || !content) return
 
-    // Animate cards on scroll
-    gsap.fromTo(cards.children, 
-      { opacity: 0, y: 50 },
+    // Animate content on scroll
+    const elements = content.querySelectorAll('.about-animate')
+    gsap.fromTo(elements, 
+      { opacity: 0, y: 40 },
       {
         opacity: 1,
         y: 0,
         duration: 0.8,
-        stagger: 0.2,
+        stagger: 0.15,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
@@ -33,109 +34,106 @@ export default function About() {
       }
     )
 
-    // Counter animation
-    const counters = section.querySelectorAll('.counter')
-    counters.forEach((counter) => {
-      const target = counter.getAttribute('data-target')
-      if (!target) return
-
-      gsap.to(counter, {
-        innerText: target,
-        duration: 2,
-        snap: { innerText: 1 },
-        scrollTrigger: {
-          trigger: counter,
-          start: 'top 80%',
-        }
-      })
-    })
-
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill())
     }
   }, [])
 
   const stats = [
-    { value: '5+', label: 'Years Experience', dataTarget: '5' },
-    { value: '50+', label: 'Projects Completed', dataTarget: '50' },
-    { value: '30+', label: 'Happy Clients', dataTarget: '30' },
+    { value: '5+', label: 'Years Experience' },
+    { value: '50+', label: 'Projects Completed' },
+    { value: '30+', label: 'Happy Clients' },
   ]
 
   return (
     <section 
       id="about"
       ref={sectionRef}
-      className="section relative overflow-hidden"
+      className="relative py-24 md:py-32 overflow-hidden"
+      style={{ background: '#050505' }}
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0 nebula-bg" />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[150px]" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[120px]" />
+      {/* Background Effects */}
+      <div className="absolute inset-0 z-0" style={{
+        background: `
+          radial-gradient(ellipse 60% 40% at 30% 20%, rgba(139, 92, 246, 0.1), transparent),
+          radial-gradient(ellipse 50% 30% at 70% 80%, rgba(59, 130, 246, 0.08), transparent)
+        `
+      }} />
 
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <p className="text-accent-purple font-medium tracking-[0.3em] mb-4 text-sm">
-            ABOUT ME
+        <div className="text-center mb-16">
+          <p className="about-animate text-purple-400 font-medium tracking-[0.2em] mb-4 text-sm uppercase">
+            About Me
           </p>
-          <h2 className="section-title">
-            Building digital experiences that matter.
+          <h2 className="about-animate text-white font-bold leading-tight mb-6" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
+            Building digital experiences
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400">
+              that matter
+            </span>
           </h2>
+          <p className="about-animate text-white/50 max-w-2xl mx-auto leading-relaxed">
+            I&apos;m a Full Stack Developer with a passion for creating beautiful, functional, 
+            and user-centered digital experiences. With 5+ years of experience, I&apos;ve worked 
+            with startups and enterprises to build products that solve real problems.
+          </p>
         </div>
 
         {/* Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left - Stylized Avatar */}
-          <div className="relative">
-            {/* Glow */}
-            <div className="absolute inset-0 bg-gradient-to-r from-accent-purple to-accent-blue rounded-2xl blur-[40px] opacity-20" />
-            
-            {/* Avatar Container */}
-            <div className="relative glass-card rounded-2xl overflow-hidden aspect-[4/5] flex items-center justify-center">
+        <div ref={contentRef} className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Left - Avatar */}
+          <div className="about-animate flex justify-center">
+            <div className="relative w-64 h-80 md:w-80 md:h-96 rounded-3xl overflow-hidden" style={{
+              background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2))',
+              border: '1px solid rgba(255,255,255,0.1)'
+            }}>
               {/* Gradient Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-accent-purple/20" />
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-transparent to-blue-500/20" />
               
               {/* Animated Circles */}
-              <div className="absolute inset-10 border-2 border-accent-purple/30 rounded-full animate-pulse" />
-              <div className="absolute inset-20 border border-accent-blue/20 rounded-full" />
-              <div className="absolute inset-32 border border-accent-pink/10 rounded-full" />
+              <div className="absolute inset-8 border border-white/10 rounded-full animate-pulse" />
+              <div className="absolute inset-16 border border-white/5 rounded-full" />
               
               {/* Large Initial */}
-              <span className="font-display text-[180px] text-white/10">S</span>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-white/20 font-bold" style={{ fontSize: '10rem' }}>S</span>
+              </div>
               
-              {/* Overlay Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-            </div>
-
-            {/* Floating Card */}
-            <div className="absolute -bottom-6 -right-6 glass-card rounded-xl p-6 max-w-[200px]">
-              <p className="text-3xl mb-2">🎨</p>
-              <p className="font-medium text-sm">Creative Solutions</p>
-              <p className="text-white/40 text-xs mt-1">Building with purpose</p>
+              {/* Glass Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
             </div>
           </div>
 
           {/* Right - Content */}
-          <div ref={cardsRef}>
-            <p className="text-white/80 text-lg leading-relaxed mb-8">
-              I&apos;m a Full Stack Developer with a passion for creating beautiful, functional, and user-centered digital experiences. With 5+ years of experience, I&apos;ve worked with startups and enterprises to build products that solve real problems.
+          <div>
+            <p className="about-animate text-white/70 leading-relaxed mb-6">
+              My approach combines technical expertise with creative thinking, ensuring every 
+              project not only works perfectly but also looks stunning and provides an 
+              exceptional user experience.
             </p>
-
-            <p className="text-white/60 leading-relaxed mb-12">
-              My approach combines technical expertise with creative thinking, ensuring every project not only works perfectly but also looks stunning and provides an exceptional user experience.
+            <p className="about-animate text-white/70 leading-relaxed mb-8">
+              I specialize in modern web technologies including React, Next.js, TypeScript, 
+              and Node.js. Whether it&apos;s building scalable backend systems or crafting 
+              beautiful frontend interfaces, I bring dedication and attention to detail 
+              to every project.
             </p>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-8">
+            <div className="about-animate grid grid-cols-3 gap-6">
               {stats.map((stat, index) => (
                 <div 
                   key={index}
-                  className="glass-card rounded-xl p-6 text-center card-hover"
+                  className="text-center p-4 rounded-2xl"
+                  style={{
+                    background: 'rgba(255,255,255,0.03)',
+                    border: '1px solid rgba(255,255,255,0.05)'
+                  }}
                 >
-                  <p className="counter font-display text-4xl text-accent-purple" data-target={stat.dataTarget}>
+                  <p className="font-bold text-white mb-1" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}>
                     {stat.value}
                   </p>
-                  <p className="text-white/40 text-sm mt-2">{stat.label}</p>
+                  <p className="text-white/40 text-sm">{stat.label}</p>
                 </div>
               ))}
             </div>
